@@ -1,0 +1,8 @@
+/*canvas {
+    width: 100px;
+    height: 100px;
+    background: red;
+    -webkit-transition: width 1s, height 1s; /* For Safari 3.1 to 6.0 */
+    transition: width 1s, height 1s;
+    transition-timing-function: linear;
+}*/

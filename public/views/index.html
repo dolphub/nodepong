@@ -1,7 +1,7 @@
 <!doctype html>
 <html ng-app='nodePong'>
   <head>
-    <title>Socket.IO chat</title>
+    <title>Socket.IO Pong</title>
     <script src="jquery/dist/jquery.min.js"></script>    
     <script src="angular/angular.min.js"></script>
     <script src="angular-bootstrap/ui-bootstrap.min.js"></script>
@@ -10,10 +10,20 @@
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
     
     <script src="main.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="css/court.css"> -->
+    
     <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
+
+    <script type="text/javascript">
+
+    </script>
   </head>
 
-  <body ng-controller='pongCtrl'>    
+  <body ng-controller='pongCtrl'>   
+    
+      <canvas id="court" width="{{court.width}}" height="{{court.height}}" data-ng-init='initGame()'>
+      </canvas>
+    
     
   </body>
 </html>

@@ -9,16 +9,6 @@ function pongServer(_io, _http)
 }
 
 /**
- * Starts the server
- */
-pongServer.prototype.start = function() {
-	this.http.listen(3001, function() {
-		console.log('pongServer server started on port 3001');
-	});
-};
-
-
-/**
  * Initializes the socket events
  */
 pongServer.prototype.init = function() {
@@ -32,16 +22,35 @@ pongServer.prototype.init = function() {
 		socket.username = '';
 		console.log('Component is connecting...');
 
-		// Broadcast to all other connected users that a new user is connecting
-		console.log('New Connection...');
-
 		// Disconnected event
 		socket.on('disconnect', function() {
 			// socket.broadcast.emit('user disconnected', socket.username);
 			console.log('Component has disconnnected...');
 		});
-	});
 
+		socket.on('ball possition', function(ball) {
+			console.log('Ball x:',ball.x,'y:',ball.y);
+		});
+
+
+	});
+};
+
+/**
+ * Starts the server
+ */
+pongServer.prototype.start = function() {
+	this.http.listen(3001, function() {
+		console.log('pongServer server started on port 3001');
+	});
+};
+
+/**
+ * startGame will start the server side updates to the pong game
+ */
+pongServer.prototype.startGame = function() {
+	//TODO Start the game, other functionaltiy
+	// Will launch the ball, set scores to 0
 };
 
 
