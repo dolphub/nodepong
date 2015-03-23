@@ -1,4 +1,4 @@
-var app = angular.module('nodePong');
+var app = angular.module('nodePong', ['ui.bootstrap']);
 
 app.factory('socket', function() {
 	var socket = io.connect();
