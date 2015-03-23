@@ -26,11 +26,20 @@ pongServer.prototype.init = function() {
 		socket.on('disconnect', function() {
 			// socket.broadcast.emit('user disconnected', socket.username);
 			console.log('Component has disconnnected...');
+			clearInterval(self.ballLoop);
 		});
 
-		socket.on('ball possition', function(ball) {
-			console.log('Ball x:',ball.x,'y:',ball.y);
+		socket.on('ball ready', function(fps) {
+			self.ballLoop = setInterval(function() {
+				self.io.emit('update ball')
+			}, fps / 1000 );
 		});
+
+		
+
+			// console.log('Ball x:',x,'y:',y);
+
+		
 
 
 	});

@@ -3,9 +3,67 @@ var app = angular.module('nodePong', ['ui.bootstrap']);
 app.factory('socket', function() {
 	var socket = io.connect();
 	return socket;
-});
+}).factory('Ball', [ '$log', function($log) {
+	/**
+	 * Ball function
+	 */
+	function Ball() {
+		
+	}
 
-app.controller('pongCtrl', ['$scope', 'socket', '$log', '$interval', '$window', function($scope, socket, $log, $interval, $window) {
+	/**
+	 * @param {int} delta
+	 * @param {int} fps
+	 * @param {int} radius
+	 */
+	Ball.prototype.init = function(_delta, _fps, _radius, $scope) {
+
+		this.delta_x = _delta;
+		this.delta_y = _delta;
+		this.fps = _fps;
+		this.radius = _radius;
+
+		this.x = $scope.court.width / 2;
+		this.y = $scope.court.height / 2;
+
+		this.context = court.getContext('2d');
+		$log.info( 'Ball Initialized! ' + this );
+
+		// Send to server ball information that will be used on the server
+
+	};
+
+	/**
+	 * @param {int} X Coordinate
+	 * @param {int} Y Coordinate
+	 */
+	Ball.prototype.updateBall = function($scope) {
+		this.context.clearRect( 0, 0, $scope.court.width, $scope.court.height );		
+		// Begin Draw
+		this.context.beginPath();
+		// Fill ball with black
+		this.context.fillStyle="#000000";
+		this.context.arc( this.x, this.y, 20, 0, Math.PI*2, true ); // xPos, yPos, radius, ,arc, 
+		this.context.closePath();  // End Draw
+		// Fill
+		this.context.fill();
+		
+		if( this.x < 0 + this.radius || this.x > $scope.court.width - this.radius )
+			this.delta_x = -this.delta_x;
+		if( this.y < 0 + this.radius|| this.y > $scope.court.height - this.radius )
+			this.delta_y = -this.delta_y;
+
+		this.x += this.delta_x;
+		this.y += this.delta_y;
+
+		// Update ball position on server
+		// socket.emit('ball possition', this.x, this.y );
+	}
+
+	return new Ball();
+}]);
+
+app.controller('pongCtrl', ['$scope', 'socket', '$log', '$interval', '$window', 'Ball', function($scope, socket, $log, $interval, $window, Ball) {
 
 	// Initialize the court
 	$scope.court = {};
@@ -15,8 +73,17 @@ app.controller('pongCtrl', ['$scope', 'socket', '$log', '$interval', '$window', 
 	$scope.initGame = function() {
 	
 		// $scope.initCourt(); // not required yet
-		$scope.initBall(5, 60, 20);
+		Ball.init(1, 30, 20, $scope);
+		$scope.Ball = Ball;
+
+		socket.emit('ball ready', Ball.fps);
+		// TODO: Send court information to allow wall detection on serverside
 	};
+
+	socket.on('update ball', function() {
+		Ball.updateBall($scope);
+		// Ball.updateBall($scope, socket) }, 1000 / Ball.fps
+	});
 
 	/**
 	 * Initialize the court for this grid
@@ -35,7 +102,6 @@ app.controller('pongCtrl', ['$scope', 'socket', '$log', '$interval', '$window', 
 		if( !delta || !fps || delta <= 0 ) {
 			$log.warn('Incorrect Delta');
 		} else {
-			$scope.context = court.getContext('2d');
 
 			$scope.ball = {};
 			$scope.ball.dx=delta;
@@ -45,9 +111,7 @@ app.controller('pongCtrl', ['$scope', 'socket', '$log', '$interval', '$window', 
 			$scope.ball.y = $scope.court.height / 2;
 			$scope.ball.radius = radius;
 
-			setTimeout(function() {
-				setInterval( $scope.moveBall, 1000 / fps );	
-			}, 50);			
+
 		}		
 	};
 
@@ -58,26 +122,7 @@ app.controller('pongCtrl', ['$scope', 'socket', '$log', '$interval', '$window', 
 	 */
 	$scope.moveBall = function() {
 
-		$scope.context.clearRect( 0, 0, $scope.court.width, $scope.court.height );		
-		// Begin Draw
-		$scope.context.beginPath();
-		// Fill ball with black
-		$scope.context.fillStyle="#000000";
-		$scope.context.arc( $scope.ball.x, $scope.ball.y, 20, 0, Math.PI*2, true ); // xPos, yPos, radius, ,arc, 
-		$scope.context.closePath();  // End Draw
-		// Fill
-		$scope.context.fill();
-		
-		if( $scope.ball.x < 0 + $scope.ball.radius || $scope.ball.x > $scope.court.width - $scope.ball.radius )
-			$scope.ball.dx = -$scope.ball.dx;
-		if( $scope.ball.y < 0 + $scope.ball.radius|| $scope.ball.y > $scope.court.height - $scope.ball.radius )
-			$scope.ball.dy = -$scope.ball.dy;
 
-		$scope.ball.x += $scope.ball.dx;
-		$scope.ball.y += $scope.ball.dy;
-
-		// Update ball position on server
-		socket.emit('ball possition', $scope.ball );
 	};
 
 
