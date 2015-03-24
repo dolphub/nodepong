@@ -10,6 +10,18 @@ app.use(express.static(__dirname + '/public/views'));
 app.use(express.static(__dirname + '/public/controllers'));
 app.use(express.static(__dirname + '/bower_components'));
 
-var pongServer = new nodePong(io, http);
-pongServer.init();
-pongServer.start();
+
+// Can get configuration from admin page
+var ball = {
+	'delta_x': 1,
+	'delta_y': 1,
+	'fps': 15,
+	'radius': 20
+};
+
+var pongServer = new nodePong(io, http, ball);
+
+
+// Start server, start listeners
+pongServer.initServer();
+pongServer.startServer();
