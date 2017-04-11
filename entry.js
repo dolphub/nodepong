@@ -1,2 +1,2 @@
 
-document.write('Test writ');
+document.write('Test write');

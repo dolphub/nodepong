@@ -10,5 +10,8 @@
     "jquery": true,
     "node": true
   },
-  "parser": "babel-eslint"
+  "parser": "babel-eslint",
+  "rules": {
+    "indent": [1,4]
+  }
 }

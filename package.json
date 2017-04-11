@@ -5,6 +5,7 @@
   "description": "An n-screen configurable court pong game",
   "author": "Randy Mikkelsaar <randy.mikkelsaar@gmail.com>",
   "scripts": {
+    "prebuild": "rimraf dist",
     "build": "webpack --progress --colors --watch"
   },
   "dependencies": {
@@ -18,7 +19,9 @@
     "eslint-loader": "^1.7.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3"
+    "eslint-plugin-react": "^6.10.3",
+    "rimraf": "^2.6.1",
+    "webpack": "^2.3.3"
   },
   "repository": {
     "type": "git",
