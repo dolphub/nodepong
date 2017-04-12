@@ -1,2 +1,0 @@
-
-document.write('Test write');

@@ -12,6 +12,7 @@
   },
   "parser": "babel-eslint",
   "rules": {
-    "indent": [1,4]
+    "indent": [1,4],
+    "no-plusplus": [0,0],
   }
 }
