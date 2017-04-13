@@ -139,7 +139,7 @@ pongServer.prototype.resetBall = function() {
  */
 pongServer.prototype.startServer = function() {
     this.http.listen(3001, function() {
-    console.log('pongServer server started on port 3001');
+    console.log('pongServer server started on port 3001'.magenta);
     });
 };
 

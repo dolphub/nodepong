@@ -5,10 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HTML_PATH = path.join(__dirname, 'src/public/index.html');
 
 module.exports = {
+    devtool: 'eval-source-map',
     entry: './config/main.js',
     output: {
         path: path.join(__dirname, 'dist'),
-        publicPath: '/dist/',
         filename: 'bundle.js'
     },
     module: {
@@ -24,6 +24,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             inject: true,
             template: HTML_PATH
-        })
+        }),
     ]
 };

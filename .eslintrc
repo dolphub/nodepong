@@ -13,6 +13,9 @@
   "parser": "babel-eslint",
   "rules": {
     "indent": [1,4],
-    "no-plusplus": [0,0],
+    "no-plusplus": [0,0]
+  },
+  "settings": {
+      import/core-modules: [ "socket.io-client" ]
   }
 }
