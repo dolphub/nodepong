@@ -4,7 +4,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import TestComponent from './components/TestComponent';
 
-import 'socket.io';
+import io from 'socket.io-client';
+
+// var testSocket = io();
 
 import 'jquery/dist/jquery.js'
 import 'bootstrap/dist/css/bootstrap.css';

@@ -1,7 +1,3 @@
-const config = process.env.NODE_ENV === 'production'
-    ? require('./production')
-    : require('./development');
+import logger from './components/logger';
 
-module.exports = {
-    ...config
-};
+export { logger };

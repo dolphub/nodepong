@@ -1,33 +1,38 @@
-class App {
-    public express;
+// import { Server } from 'http';
+// import morgan from 'morgan';
 
-    constructor() {
-        this.express = express();
-        this.registerSchemas();
-        this.middleware();
-        this.routes();
-    }
+// const app = express();
+// const http = Server(app);
+// const io = require('socket.io')(http);
 
-    private registerSchemas() {
-      SchemaValidator.registerSchema('tag');
-    }
+// import config from './config';
 
-    private middleware() {
-        this.express.use(logger('dev'));
-        this.express.use(bodyParser.json());
-        this.express.use(bodyParser.urlencoded({ extended: true }));
-    }
+// // const nodePong = require('./pongServer');
+// app.use(morgan('dev'));
+// app.use(express.static(path.join(__dirname, './../../dist')));
 
-    private routes() {
-        this.initBaseRoute();
-        this.express.use('/tags', TagRoutes);
-    }
 
-    private initBaseRoute() {
-        this.express.get('/', (req, res) => {
-            res.status(200).send('API Version 1.0');
-        });
-    }
-}
+// // TODO: Set up express app as class
+// // Set up express app to load routes dynamically using router
 
-export default new App().express;
+// //
+// // // Can get configuration from admin page
+// // let ball = {
+// // 	'delta_x': 1,
+// // 	'delta_y': 1,
+// // 	'fps': 15,
+// // 	'radius': 20
+// // };
+// //
+// // var pongServer = new nodePong(io, http, ball);
+// //
+// //
+// // // Start server, start listeners
+// // pongServer.initServer();
+// // pongServer.startServer();
+
+// // console.log(config);
+// let listener = http.listen(config.PORT, config.HOST, () => {
+//     // console.log(listener);
+//     console.log(`Server listening on ${listener.address().address}:${listener.address().port}`.green);
+// });

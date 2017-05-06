@@ -1,41 +1,34 @@
 import express from 'express';
-import { Server } from 'http';
-import path from 'path';
-import 'colors';
+import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import path from 'path';
 
-const app = express();
-const http = Server(app);
-const io = require('socket.io')(http);
+class App {
+    constructor() {
+        this.express = express();
+        this.express.use(express.static(path.join(__dirname, './../../dist')));
+        middleware.call(this);
+        routes.call(this);
+    }
+}
 
-import config from './config';
+// Private functions
 
-// const nodePong = require('./pongServer');
-app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, './../../dist')));
+function middleware() {
+    this.express.use(morgan('dev'));
+    this.express.use(bodyParser.json());
+    this.express.use(bodyParser.urlencoded({ extended: true }));
+}
 
+function routes() {
+    initBaseRoute.call(this);
+    // this.express.use('/tags', TagRoutes);
+}
 
-// TODO: Set up express app as class
-// Set up express app to load routes dynamically using router
+function initBaseRoute() {
+    this.express.get('/', (req, res) => {
+        res.status(200).send('API Version 1.0');
+    });
+}
 
-//
-// // Can get configuration from admin page
-// let ball = {
-// 	'delta_x': 1,
-// 	'delta_y': 1,
-// 	'fps': 15,
-// 	'radius': 20
-// };
-//
-// var pongServer = new nodePong(io, http, ball);
-//
-//
-// // Start server, start listeners
-// pongServer.initServer();
-// pongServer.startServer();
-
-// console.log(config);
-let listener = http.listen(config.PORT, config.HOST, () => {
-    // console.log(listener);
-    console.log(`Server listening on ${listener.address().address}:${listener.address().port}`.green);
-});
+export default new App().express;
