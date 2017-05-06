@@ -13,6 +13,11 @@ import config from './config';
 // const nodePong = require('./pongServer');
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, './../../dist')));
+
+
+// TODO: Set up express app as class
+// Set up express app to load routes dynamically using router
+
 //
 // // Can get configuration from admin page
 // let ball = {

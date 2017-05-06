@@ -12,6 +12,7 @@ const HTML_PATH = path.join(__dirname, 'src/public/index.html');
 var config = {
     devtool: "inline-source-map",
     entry: './src/public/index.js',
+    watch: false,
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js',

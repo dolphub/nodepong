@@ -2,12 +2,13 @@
   "name": "nodepong",
   "private": true,
   "version": "1.0.0",
-  "description": "An n-screen configurable court pong game",
+  "description": "An n-screen configurable pong game",
   "author": "Randy Mikkelsaar <randy.mikkelsaar@gmail.com>",
   "scripts": {
     "prestart": "rimraf dist",
     "server": "babel-node src/app/app.js",
     "client": "webpack",
+    "dev": "webpack-dev-server",
     "start": "npm-run-all client server",
     "prebuild": "rimraf dist",
     "build": "NODE_ENV=production webpack -p --config webpack.config.js"
