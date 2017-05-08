@@ -1,7 +1,10 @@
-const config = process.env.NODE_ENV === 'production'
-    ? require('./production')
-    : require('./development');
+import logger from './components/logger';
 
-module.exports = {
-    ...config
+export { logger };
+
+export default {
+    server: {
+        PORT: process.env.PORT || 3001,
+        HOST: process.env.PORT || '127.0.0.1',
+    },
 };
