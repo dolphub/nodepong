@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import path from 'path';
 
-class App {
+class Express {
     constructor() {
         this.express = express();
         this.express.use(express.static(path.join(__dirname, './../../dist')));
@@ -31,4 +31,4 @@ function initBaseRoute() {
     });
 }
 
-export default new App().express;
+export default new Express().express;

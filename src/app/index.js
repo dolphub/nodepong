@@ -1,4 +1,5 @@
 import { server } from './server';
+import sockets from './socket';
 
-// console.log(server);
+sockets.init();
 server.start();

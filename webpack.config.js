@@ -62,7 +62,7 @@ var config = {
     // },
     plugins: [
         new HtmlWebpackPlugin({
-            inject: true,
+            inject: false,
             template: HTML_PATH
         }),
     ]

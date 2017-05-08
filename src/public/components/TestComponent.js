@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
+import io from 'socket.io-client';
 
 class TestComponent extends Component {
+    componentWillMount() {
+        var testSocket = io();
+    }
     render() {
         return (
             <div>

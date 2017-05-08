@@ -2,17 +2,15 @@ import express from 'express';
 import http from 'http';
 import IO from 'socket.io';
 
-import { logger } from './config';
-import App from './app';
-
-const port = process.env.PORT || 3001;
-const host = process.env.PORT || '127.0.0.1';
+import config, { logger } from './config';
+import expressapp from './express';
 
 class ServerImplementation {
 
     constructor() {
-        this.instance = http.createServer(App);
+        this.instance = http.createServer(expressapp);
         this.io = IO(this.instance);
+        
     }
 
     start() {
@@ -22,7 +20,7 @@ class ServerImplementation {
         }
         this.instance.on('listening', onListening.bind(this));
         this.instance.on('error', onError.bind(this));
-        this.instance.listen(port, host);
+        this.instance.listen(config.server.PORT, config.server.HOST);
     }
 
     restart() {
