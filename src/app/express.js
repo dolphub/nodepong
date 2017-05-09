@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import compression from 'compression';
 import morgan from 'morgan';
 import path from 'path';
 
@@ -18,6 +19,7 @@ function middleware() {
     this.express.use(morgan('dev'));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
+    this.express.use(compression());
 }
 
 function routes() {
