@@ -65,6 +65,12 @@ var config = {
             inject: false,
             template: HTML_PATH
         }),
+        // Defining plugins lets it be available in the global namespace, this is not what we want
+        // We could however build these plugins based on a config file
+        new webpack.DefinePlugin({
+            SOCKET_HOST: JSON.stringify(process.env.SOCKET_HOST || "http://localhost"),
+            SOCKET_PORT: JSON.stringify(process.env.SOCKET_PORT || 3001)
+        })
     ]
 };
 

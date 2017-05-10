@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './styles/main.scss';
 
 
-
+console.debug(`Socket PORT: ${SOCKET_PORT}`);
 render(
     <TestComponent />,
     document.getElementById('app')
