@@ -10,7 +10,6 @@ class ServerImplementation {
     constructor() {
         this.instance = http.createServer(expressapp);
         this.io = IO(this.instance);
-        
     }
 
     start() {
@@ -44,7 +43,7 @@ function onError(error) {
             break;
 
         case 'EADDRINUSE':
-            console.error(`Port ${this.port} is already in use`);
+            console.error(`Port ${config.server.PORT} is already in use`);
             process.exit(1);
             break;
         default:

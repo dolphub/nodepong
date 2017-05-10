@@ -5,11 +5,13 @@
   "description": "An n-screen configurable pong game",
   "author": "Randy Mikkelsaar <randy.mikkelsaar@gmail.com>",
   "scripts": {
-    "prestart": "rimraf dist",
+    "dist-clean": "rimraf dist",
     "server": "babel-node src/app/index.js",
+    "server:watch": "nodemon --exec 'yarn server' src/app/**/*.js",
     "client": "webpack",
-    "dev": "webpack-dev-server",
-    "start": "npm-run-all client server",
+    "client:devserver": "webpack-dev-server",
+    "dev": "npm-run-all --parallel client:devserver server:watch",
+    "start": "npm-run-all dist-clean client server",
     "prebuild": "rimraf dist",
     "build": "NODE_ENV=production webpack -p --config webpack.config.js"
   },

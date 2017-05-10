@@ -1,10 +1,13 @@
 import 'colors';
-import * as winston from 'winston';
+import winston from 'winston';
 
+const LOG_LEVEL = process.env.NODE_ENV === 'production' ? 'info' : 'debug';
 const Logger = new winston.Logger({
-    level: 'info',
+    level: LOG_LEVEL,
     transports: [
-        new (winston.transports.Console)(),
+        new (winston.transports.Console)({
+            colorize: 'all',
+        }),
     ],
 });
 
